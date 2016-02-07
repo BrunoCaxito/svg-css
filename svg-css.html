@@ -1,0 +1,76 @@
+<!--
+    @license
+    Copyright (c) 2016 Bruno Caxito
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+-->
+
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="svg-css">
+	<style>
+        :host {
+            display:            inline-block    ;
+        }
+        
+        #svg {
+            width:              100%            ;
+            height:             100%            ;
+            padding:            0px             ;
+        }
+    </style>
+    
+    <template>
+        <!-- Source SVG content will be added here. -->
+        <svg id="svg"></svg>
+        
+        <!-- Inline content will be added here. -->
+        <content></content>
+	</template>
+</dom-module>
+
+<script type="text/javascript">
+	Polymer({
+		is: "svg-css",
+        
+        properties: {
+            src: {
+                type: String,
+                value: null
+            }
+        },
+        
+        ready: function() {
+            // Get SVG file content.
+            var xhttp = new XMLHttpRequest();
+            var element = this.$.svg;
+            
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    // Update the view.
+                    var doc = new DOMParser().parseFromString(xhttp.responseText, "application/xml");
+                    element.appendChild(element.ownerDocument.importNode(doc.documentElement, true));
+                }
+            };
+            
+            xhttp.open("GET", this.src, true);
+            xhttp.send();
+        }
+	});
+</script>
