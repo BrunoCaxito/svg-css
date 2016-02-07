@@ -27,7 +27,7 @@ Style it free.
 
 You can also install using the Bower repo:
 
-    bower install -save 
+    bower install --save svg-css
 
 ## License
 
