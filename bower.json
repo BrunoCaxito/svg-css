@@ -1,5 +1,6 @@
 {
   "name": "svg-css",
+  "version": "1.0.0",
   "authors": [
     "Bruno Caxito <brunocaxito@yahoo.com.br>"
   ],
@@ -20,6 +21,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
+    "bower_components",
     "test",
     "tests"
   ],
