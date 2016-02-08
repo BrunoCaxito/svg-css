@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>svg-css</title>
+    
+    <!-- Dont't forget to add Polymer to your project. -->
+    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    
+    <!-- Import the element. -->
+    <link rel="import" href="../svg-css.html">
+    
+    <!-- Style it using CSS selectors for SVG's tags and properties. -->
+    <style>
+        path {
+            fill: red;
+        }
+    </style>
+    
+    <!-- Work with the CSSRules if you want. You can also use CSS classes for a more elegant code. -->
+    <script>
+        function changeColor(color) {
+            // You may need to change the arrays indexes for your case.
+            document.styleSheets[2].cssRules[0].style.fill = color
+        }
+    </script>
+</head>
+<body style="text-align: center;">
+    <!-- Add the element, inline, where you need it. Leave it empty if you just want the image. -->
+    <svg-css src="demo.svg">Demo</svg-css>
+    
+    <br /><br /><br />
+    <button onclick="changeColor('red')">Red</button>
+    <button onclick="changeColor('blue')">Blue</button>
+</body>
+</html>

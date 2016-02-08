@@ -1,0 +1,29 @@
+{
+  "name": "svg-css",
+  "authors": [
+    "Bruno Caxito <brunocaxito@yahoo.com.br>"
+  ],
+  "description": "A simple custom element in polymer, allowing SVG images to be styled with CSS in HTML pages.",
+  "main": "svg-css.html",
+  "moduleType": [],
+  "keywords": [
+    "svg",
+    "css",
+    "rules",
+    "custom",
+    "edit",
+    "style",
+    "image"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/BrunoCaxito/svg-css",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.4"
+  }
+}
