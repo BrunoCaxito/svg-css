@@ -52,25 +52,39 @@
         properties: {
             src: {
                 type: String,
-                value: null
+                value: null,
+				observer: "_disabledChanged"
             }
         },
         
         ready: function() {
-            // Get SVG file content.
+           _disabledChanged(null, null)
+        },
+		
+		/**
+		 * Observes any changes on the src propertie and apply the switch of image.
+		 */
+		_disabledChanged: function(newValue, oldValue) {
+			 // Get SVG file content.
             var xhttp = new XMLHttpRequest();
             var element = this.$.svg;
             
             xhttp.onreadystatechange = function() {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    // Update the view.
                     var doc = new DOMParser().parseFromString(xhttp.responseText, "application/xml");
-                    element.appendChild(element.ownerDocument.importNode(doc.documentElement, true));
+                   	
+					// Remove previous image.
+					while (element.firstChild) {
+						element.removeChild(element.firstChild);
+					}
+					
+					// Update the view.
+					element.appendChild(element.ownerDocument.importNode(doc.documentElement, true));
                 }
             };
             
             xhttp.open("GET", this.src, true);
             xhttp.send();
-        }
+		}
 	});
 </script>
