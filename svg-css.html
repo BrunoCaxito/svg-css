@@ -53,38 +53,48 @@
             src: {
                 type: String,
                 value: null,
-				observer: "_disabledChanged"
+				observer: "_changeSource"
             }
         },
+		
+		/**
+		 * Get the image and displays it.
+		 */
+		getSource: function() {
+			// Get SVG file content.
+            if(this.src != null) {
+				var xhttp = new XMLHttpRequest();
+				var element = this.$.svg;
+			
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						var doc = new DOMParser().parseFromString(xhttp.responseText, "application/xml");
+
+						// Remove previous image.
+						while (element.firstChild) {
+							element.removeChild(element.firstChild);
+						}
+
+						// Update the view.
+						element.appendChild(element.ownerDocument.importNode(doc.documentElement, true));
+					}
+				};
+
+				xhttp.open("GET", this.src, true);
+				xhttp.send();
+			}
+            
+		},
         
         ready: function() {
-           _disabledChanged(null, null)
+           this.getSource();
         },
 		
 		/**
 		 * Observes any changes on the src propertie and apply the switch of image.
 		 */
-		_disabledChanged: function(newValue, oldValue) {
-			 // Get SVG file content.
-            var xhttp = new XMLHttpRequest();
-            var element = this.$.svg;
-            
-            xhttp.onreadystatechange = function() {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    var doc = new DOMParser().parseFromString(xhttp.responseText, "application/xml");
-                   	
-					// Remove previous image.
-					while (element.firstChild) {
-						element.removeChild(element.firstChild);
-					}
-					
-					// Update the view.
-					element.appendChild(element.ownerDocument.importNode(doc.documentElement, true));
-                }
-            };
-            
-            xhttp.open("GET", this.src, true);
-            xhttp.send();
+		_changeSource: function(newValue, oldValue) {
+			this.getSource();
 		}
 	});
 </script>
