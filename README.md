@@ -32,5 +32,3 @@ You can also install using the Bower repo:
 ## License
 
 Everything in this repository is MIT style license.
-
-Copyright (c) 2016 Bruno Caxito. All rights reserved.
